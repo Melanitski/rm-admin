@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="rm_admin_index" pattern="/">
+        <default key="_controller">RMAdminBundle:Index:index</default>
+    </route>
+
+    <route id="rm_admin_login" pattern="/login">
+        <default key="_controller">RMAdminBundle:Index:login</default>
+    </route>
+
+    <route id="rm_admin_menu_list" pattern="/menu/list">
+        <default key="_controller">RMAdminBundle:Menu:list</default>
+    </route>
+
+</routes>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <!-- directories -->
+        <parameter key="rm.admin.mapping_dirs" type="collection"/>
+        <parameter key="rm.admin.document_dirs" type="collection"/>
+
+        <!-- configuration -->
+        <parameter key="rm.admin.configuration.class">RM\AdminBundle\Configuration</parameter>
+
+        <!-- cache -->
+        <parameter key="rm.admin.cache.array.class">Doctrine\Common\Cache\ArrayCache</parameter>
+
+        <!-- metadata -->
+        <parameter key="rm.admin.metadata.driver_chain.class">Doctrine\ORM\Mapping\Driver\DriverChain</parameter>
+        <parameter key="rm.admin.metadata.annotation.class">RM\AdminBundle\Mapping\Driver\AnnotationDriver</parameter>
+        <parameter key="rm.admin.metadata.factory.class">RM\AdminBundle\Mapping\ClassMetadataFactory</parameter>
+
+        <!-- cache warmer -->
+        <parameter key="doctrine.orm.proxy_cache_warmer.class">Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer</parameter>
+
+        <parameter key="rm.admin.ext_manager.class">RM\AdminBundle\ExtManager</parameter>
+
+    </parameters>
+
+    <services>
+
+        <!-- configuration -->
+        <service id="rm.admin.configuration" class="%rm.admin.configuration.class%" />
+        <service id="rm.admin.metadata.annotation_reader" alias="annotation_reader" />
+
+        <service id="rm.admin.metadata.annotation" class="%rm.admin.metadata.annotation.class%">
+            <argument type="service" id="rm.admin.metadata.annotation_reader" />
+            <argument>%rm.admin.document_dirs%</argument>
+        </service>
+
+    </services>
+
+</container>

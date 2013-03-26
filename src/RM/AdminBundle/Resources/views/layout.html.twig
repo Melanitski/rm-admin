@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}RM Admine{% endblock %}</title>
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+
+        {# Assets styles #}
+        {% stylesheets  '@RMAdminBundle/Resources/public/css/*' %}
+            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        <link rel="stylesheet" type="text/css" media="screen" href="/bundles/rmadmin/ext-js/resources/css/ext-all.css"/>
+
+    </head>
+    <body>
+
+        {# Flash messages #}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-message">
+                <em>Notice</em>: {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {# Content view output  #}
+        {% block content %}{% endblock %}
+    </body>
+
+    {# Javascript output here  #}
+    {% javascripts  '@RMAdminBundle/Resources/public/ext-js/ext-all-debug-w-comments.js'
+                    '@RMAdminBundle/Resources/public/js/RmAdmin/MVCHelper.js'
+                    '@RMAdminBundle/Resources/public/js/RmAdmin/app.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% block javascripts %}{% endblock %}
+
+</html>
